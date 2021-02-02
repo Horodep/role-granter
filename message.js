@@ -1,7 +1,7 @@
 import { MessageEmbed } from "discord.js";
 import config from "./config.json";
 
-const defaultEmojiNames = ['red', 'green', 'white'];
+const defaultEmojiNames = ['c_red', 'c_green', 'c_white'];
 
 export function Message(message) {
 	try {
