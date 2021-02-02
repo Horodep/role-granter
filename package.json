@@ -1,0 +1,23 @@
+{
+  "name": "role-granter",
+  "version": "1.0.0",
+  "description": "grant roles in discord",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Horodep/role-granter.git"
+  },
+  "author": "Horodep",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Horodep/role-granter/issues"
+  },
+  "homepage": "https://github.com/Horodep/role-granter#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1"
+  }
+}
