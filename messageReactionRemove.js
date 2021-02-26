@@ -1,3 +1,5 @@
+import { HandleRole } from "./HandleRole.js";
+
 export async function AsyncMessageReactionRemove(reaction, user) {
 	try {
 		if (user.bot) return;
@@ -8,14 +10,8 @@ export async function AsyncMessageReactionRemove(reaction, user) {
 
 		console.log(`${member.displayName} removed reaction ${reaction._emoji.name}.`);
 
-		Handle(reaction, member);
+		HandleRole(reaction, member, 0);
 	} catch (e) {
 		console.error(e);
 	}
 };
-
-function Handle(reaction, member) {
-	var role = member.guild.roles.cache.find(r => r.name == reaction._emoji.name);
-	if (role == null) return;
-	member.roles.remove(role);
-}
