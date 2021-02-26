@@ -1,11 +1,11 @@
-import { HandleRole } from "./handleRole.js";
+import { HandleRole, AddRole, RemoveRole } from "./handleRole.js";
 
 export async function AsyncMessageReactionAdd(reaction, user) {
-    await AsyncMessageReaction(reaction, user, (member, role) => member.roles.add(role));
+    await AsyncMessageReaction(reaction, user, AddRole);
 }
 
 export async function AsyncMessageReactionRemove(reaction, user) {
-    await AsyncMessageReaction(reaction, user, (member, role) => member.roles.remove(role));
+    await AsyncMessageReaction(reaction, user, RemoveRole);
 }
 
 async function AsyncMessageReaction(reaction, user, action) {
