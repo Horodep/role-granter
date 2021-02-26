@@ -1,5 +1,4 @@
 import { MessageEmbed } from "discord.js";
-import config from "./config.json";
 
 const excludedEmojis = ['c_red', 'c_green', 'c_white'];
 
@@ -29,7 +28,7 @@ export function Message(message) {
 function setEmojis(emojiCache, prefix) {
 	return (msg) => {
 		emojiCache.forEach(e => {
-			if (e.name.startsWith(prefix) && !excludedEmojis.includes(e.name))
+			if (e.name.startsWith(prefix))
 				msg.react(e);
 		});
 	};
