@@ -1,7 +1,5 @@
 import { MessageEmbed } from "discord.js";
 
-const excludedEmojis = ['c_red', 'c_green', 'c_white'];
-
 export function Message(message) {
 	try {
 		if (message.author.bot || !message.content.startsWith("!")) return;
