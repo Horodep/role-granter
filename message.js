@@ -8,6 +8,7 @@ export function Message(message) {
 
 		var emojiCache = message.guild.emojis.cache;
 		var command = config.commands[message.content];
+		if (!command) return;
 		
 		var embed = CreateEmbed(command.title, command.text, command.img)
 		message.channel.send(embed).then(setEmojis(emojiCache, command.prefix));
