@@ -1,4 +1,5 @@
-const prefixes = ['c_', 'g_'];
+import config from "./config.json";
+const prefixes = Object.values(config.commands).map(c => c.prefix);
 
 export function HandleRole(reaction, member, action) {
 	if (reaction.emoji.guild?.id != member.guild.id) return;

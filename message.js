@@ -1,4 +1,5 @@
 import { MessageEmbed } from "discord.js";
+import config from "./config.json";
 
 export function Message(message) {
 	try {
@@ -6,18 +7,10 @@ export function Message(message) {
 		if (message.channel.type != "text") return;
 
 		var emojiCache = message.guild.emojis.cache;
-
-		switch (message.content) {
-			case "!rg":
-				var embed = CreateEmbed("Choose your color!", "Click an emoji to change your color on server.",
-					'https://cdn.discordapp.com/attachments/567589102803746853/806086398046109696/paint-brush.png')
-				message.channel.send(embed).then(setEmojis(emojiCache, "c_"));
-				break;
-			case "!pick_game":
-				var embed = CreateEmbed("Choose your game!", "Click an emoji to enable access to game channels.")
-				message.channel.send(embed).then(setEmojis(emojiCache, "g_"));
-				break;
-		}
+		var command = config.commands[message.content];
+		
+		var embed = CreateEmbed(command.title, command.text, command.img)
+		message.channel.send(embed).then(setEmojis(emojiCache, command.prefix));
 	} catch (e) {
 		console.error(e);
 	}
