@@ -4,7 +4,11 @@ import config from "./config.json";
 import { Message } from "./message.js";
 import { AsyncMessageReactionAdd, AsyncMessageReactionRemove } from "./messageReactions.js";
 
-const client = new Discord.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
+export const client = new Discord.Client(
+	{ 
+		partials: ['MESSAGE', 'CHANNEL', 'REACTION'], 
+		intents: ["GUILDS", "GUILD_VOICE_STATES", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "GUILD_MEMBERS", "DIRECT_MESSAGES"] 
+	});
 client.login(config.credentials.discordApiKey);
 
 client.on("ready", () => { console.log("Discord client connected!"); });
