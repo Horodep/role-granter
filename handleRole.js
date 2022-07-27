@@ -1,4 +1,4 @@
-import config from "./config.json";
+import config from "./config.json" assert {type: "json"};
 const prefixes = Object.values(config.commands).map(c => c.prefix);
 
 export function HandleRole(reaction, member, action) {

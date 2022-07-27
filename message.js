@@ -1,5 +1,5 @@
 import { MessageEmbed } from "discord.js";
-import config from "./config.json";
+import config from "./config.json" assert {type: "json"};
 
 export function Message(message) {
 	try {
