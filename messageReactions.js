@@ -16,6 +16,8 @@ async function AsyncMessageReaction(reaction, user, action) {
 		var member = reaction.message.guild.members.cache.find(m => m.id === user.id);
 		if (member == null) return;
 
+		console.log(action.name + ": " + member.displayName + " - " + reaction.emoji.name);
+
 		HandleRole(reaction, member, action);
 	} catch (e) {
 		console.error(e);
