@@ -1,17 +1,32 @@
 // https://discordjs.guide/additional-info/changes-in-v12.html
-import Discord from "discord.js";
+import { Client, GatewayIntentBits, Partials, Events } from "discord.js";
 import config from "./config.json" with {type: "json"};
 import { Message } from "./message.js";
 import { AsyncMessageReactionAdd, AsyncMessageReactionRemove } from "./messageReactions.js";
 
-export const client = new Discord.Client(
+export const client = new Client(
 	{ 
-		partials: ['MESSAGE', 'CHANNEL', 'REACTION'], 
-		intents: ["GUILDS", "GUILD_VOICE_STATES", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "GUILD_MEMBERS", "DIRECT_MESSAGES"] 
+		allowedMentions: { 
+			parse: ['users', 'roles', 'everyone'], 
+			repliedUser: true 
+		},
+		partials: [
+			Partials.Message, 
+			Partials.Channel, 
+			Partials.Reaction
+		], 
+		intents: [
+			GatewayIntentBits.Guilds,
+			GatewayIntentBits.GuildMessages,
+			GatewayIntentBits.MessageContent,
+			GatewayIntentBits.GuildMembers,
+			GatewayIntentBits.GuildMessageReactions
+		] 
 	});
+
 client.login(config.credentials.discordApiKey);
 
-client.on("ready", () => { console.log("Discord client connected!"); });
-client.on("message", (_message) => Message(_message));
-client.on("messageReactionAdd", (reaction, user) => AsyncMessageReactionAdd(reaction, user));
-client.on("messageReactionRemove", (reaction, user) => AsyncMessageReactionRemove(reaction, user));
+client.on(Events.ClientReady, () => { console.log("Discord client connected!"); });
+client.on(Events.MessageCreate, (_message) => Message(_message));
+client.on(Events.MessageReactionAdd, (reaction, user) => AsyncMessageReactionAdd(reaction, user));
+client.on(Events.MessageReactionRemove, (reaction, user) => AsyncMessageReactionRemove(reaction, user));

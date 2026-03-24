@@ -1,17 +1,18 @@
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder, ChannelType } from "discord.js";
 import config from "./config.json" with {type: "json"};
 
 export function Message(message) {
 	try {
 		if (message.author.bot || !message.content.startsWith("!")) return;
-		if (message.channel.type != "text") return;
+		if (message.channel.type != ChannelType.GuildText) return;
 
 		var emojiCache = message.guild.emojis.cache;
 		var command = config.commands[message.content];
 		if (!command) return;
 		
 		var embed = CreateEmbed(command.title, command.text, command.img)
-		message.channel.send(embed).then(setEmojis(emojiCache, command.prefix));
+		message.channel.send({ embeds: [embed] }).then(setEmojis(emojiCache, command.prefix));
+		message.delete();
 	} catch (e) {
 		console.error(e);
 	}
@@ -27,8 +28,8 @@ function setEmojis(emojiCache, prefix) {
 }
 
 function CreateEmbed(title, text, thumbnail) {
-	return new MessageEmbed()
-		.setAuthor(title)
+	return new EmbedBuilder()
+		.setAuthor({ name: title })
 		.setDescription(text)
 		.setColor(0x5282ef)
 		.setThumbnail(thumbnail);
