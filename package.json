@@ -1,6 +1,6 @@
 {
   "name": "role-granter",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "grant roles in discord",
   "main": "index.js",
   "type": "module",
